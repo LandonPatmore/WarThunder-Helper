@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,6 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.chart.CategoryAxis?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.csc495.landonpatmore.Controller">
    <children>
       <MenuBar prefHeight="29.0" prefWidth="1200.0">
@@ -278,7 +282,31 @@
           </Tab>
             <Tab text="Live Charts">
                <content>
-                  <AnchorPane fx:id="chartsPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="1200.0">
+                           <buttons>
+                              <CheckBox mnemonicParsing="false" text="Speed" />
+                              <CheckBox mnemonicParsing="false" text="Altitude" />
+                              <CheckBox mnemonicParsing="false" text="Heading" />
+                           </buttons>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </ButtonBar>
+                        <ScrollPane fx:id="chartsPane" layoutY="40.0" prefHeight="698.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                           <content>
+                              <LineChart fx:id="speedTestChart" animated="false" legendVisible="false" prefHeight="409.0" prefWidth="1199.0" title="Speed">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                           </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
                </content>
             </Tab>
         </tabs>

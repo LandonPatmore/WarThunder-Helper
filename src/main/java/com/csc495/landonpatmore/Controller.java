@@ -8,12 +8,22 @@ import com.csc495.landonpatmore.utils.Network;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Controller {
 
@@ -53,11 +63,23 @@ public class Controller {
     @FXML
     private Rectangle rudderRight;
 
+    @FXML
+    private LineChart<String, Number> speedTestChart;
+
+    // setup a scheduled executor to periodically put data into the chart
+    private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss.SSS");
+
+    private final int WINDOW_SIZE = 500;
+
 
     public void initialize() {
-        final Thread thread = new Thread(getState(new MockNetworking()));
-        thread.setDaemon(true);
-        thread.start();
+        speedTestChart.setHorizontalGridLinesVisible(false);
+        speedTestChart.setVerticalGridLinesVisible(false);
+        speedTestChart.setCreateSymbols(false);
+
+        getState(new MockNetworking());
     }
 
     private void setVerticalControlSurface(Rectangle positive, Rectangle negative, int value) {
@@ -97,44 +119,44 @@ public class Controller {
     }
 
 
-    private Task getState(Network networking) {
-        return new Task<>() {
-            @Override
-            protected Void call() throws InterruptedException {
-                while (true) {
-                    Thread.sleep(10);
-                    JSONObject stateJson;
-                    JSONObject indicatorsJson;
-                    stateJson = networking.getState();
-                    indicatorsJson = networking.getIndicators();
-                    final AircraftState aircraftState = Helpers.buildState(stateJson);
-                    final AircraftIndicators aircraftIndicators = Helpers.buildIndicators(indicatorsJson);
+    private void getState(Network networking) {
+        final XYChart.Series<String, Number> series = new XYChart.Series<>();
+        speedTestChart.getData().add(series);
 
-                    if (aircraftState.isValid() && aircraftIndicators.isValid()) {
-                        Platform.runLater(() -> {
-                            setVerticalControlSurface(elevatorUp, elevatorDown, aircraftState.getElevatorPercentage());
-                            setText(elevatorPercentage, aircraftState.getElevatorPercentage(), "%");
-                            setHorizontalControlSurface(aileronRight, aileronLeft, aircraftState.getAileronPercentage());
-                            setText(aileronPercentage, aircraftState.getAileronPercentage(), "%");
-                            setHorizontalControlSurface(rudderRight, rudderLeft, aircraftState.getRudderPercentage());
-                            setText(rudderPercentage, aircraftState.getRudderPercentage(), "%");
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            Date now = new Date();
+            JSONObject stateJson = networking.getState();
+            JSONObject indicatorsJson = networking.getIndicators();
+            final AircraftState aircraftState = Helpers.buildState(stateJson);
+            final AircraftIndicators aircraftIndicators = Helpers.buildIndicators(indicatorsJson);
 
-                            setText(iasSpeed, aircraftState.getIAS());
-                            setText(tasSpeed, aircraftState.getTAS());
-                            setText(aircraftHeight, aircraftState.getAltitude());
+            if (aircraftState.isValid() && aircraftIndicators.isValid()) {
+                Platform.runLater(() -> {
+                    setVerticalControlSurface(elevatorUp, elevatorDown, aircraftState.getElevatorPercentage());
+                    setText(elevatorPercentage, aircraftState.getElevatorPercentage(), "%");
+                    setHorizontalControlSurface(aileronRight, aileronLeft, aircraftState.getAileronPercentage());
+                    setText(aileronPercentage, aircraftState.getAileronPercentage(), "%");
+                    setHorizontalControlSurface(rudderRight, rudderLeft, aircraftState.getRudderPercentage());
+                    setText(rudderPercentage, aircraftState.getRudderPercentage(), "%");
 
-                            setText(heading, Math.floor(aircraftIndicators.getCompass()), "°");
-                            rotateShape(headingIndicator, Math.floor(aircraftIndicators.getCompass()));
-
-                            setText(roll, Math.floor(aircraftIndicators.getAviahorizon_roll()), "°");
-                            rotatePane(rollIndicator, Math.floor(aircraftIndicators.getAviahorizon_roll()));
-                        });
-                    } else {
-                        System.out.println("Not valid data...");
+                    setText(iasSpeed, aircraftState.getIAS());
+                    series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), aircraftState.getIAS()));
+                    if (series.getData().size() > WINDOW_SIZE) {
+                        series.getData().remove(0);
                     }
-                }
+                    setText(tasSpeed, aircraftState.getTAS());
+                    setText(aircraftHeight, aircraftState.getAltitude());
+
+                    setText(heading, Math.floor(aircraftIndicators.getCompass()), "°");
+                    rotateShape(headingIndicator, Math.floor(aircraftIndicators.getCompass()));
+
+                    setText(roll, Math.floor(aircraftIndicators.getAviahorizon_roll()), "°");
+                    rotatePane(rollIndicator, Math.floor(aircraftIndicators.getAviahorizon_roll()));
+                });
+            } else {
+                System.out.println("Not valid data...");
             }
-        };
+        }, 0, 10, TimeUnit.MILLISECONDS);
     }
 }
 

@@ -83,14 +83,14 @@ public class MockNetworking implements Network {
 
     private void changeIntValue(JSONObject json, String key, int lowerBound, int upperBound) {
         int valueToChange = json.getInt(key);
-        int random = new Random().nextInt(10);
+        int random = new Random().nextInt(20);
 
         changeValue(json, key, random, valueToChange, lowerBound, upperBound, true);
     }
 
     private void changeDoubleValue(JSONObject json, String key, int lowerBound, int upperBound) {
         double valueToChange = json.getDouble(key);
-        int random = new Random().nextInt(10);
+        int random = new Random().nextInt(20);
 
         changeValue(json, key, random, (int) valueToChange, lowerBound, upperBound, false);
     }
