@@ -3,6 +3,8 @@ package com.csc495.landonpatmore;
 import com.csc495.landonpatmore.models.AircraftIndicators;
 import com.csc495.landonpatmore.models.AircraftState;
 import com.csc495.landonpatmore.utils.Helpers;
+import com.csc495.landonpatmore.utils.MockNetworking;
+import com.csc495.landonpatmore.utils.Network;
 import com.csc495.landonpatmore.utils.Networking;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.application.Platform;
@@ -26,6 +28,12 @@ public class Controller {
     private Text aircraftHeight;
     @FXML
     private Text heading;
+    @FXML
+    private Text elevatorPercentage;
+    @FXML
+    private Text aileronPercentage;
+    @FXML
+    private Text rudderPercentage;
 
     @FXML
     private Polygon headingIndicator;
@@ -45,7 +53,7 @@ public class Controller {
 
 
     public void initialize() {
-        final Thread thread = new Thread(getState());
+        final Thread thread = new Thread(getState(new MockNetworking()));
         thread.setDaemon(true);
         thread.start();
     }
@@ -78,20 +86,43 @@ public class Controller {
         text.setText(String.valueOf(value));
     }
 
+    private void setText(Object value, Text text, String postFix) {
+        text.setText(value + postFix);
+    }
 
-    private Task getState() {
+
+    private Task getState(Network networking) {
         return new Task<>() {
             @Override
             protected Void call() throws InterruptedException {
-                double angle = 0;
                 while (true) {
-                    Thread.sleep(500);
-                    double finalAngle = angle;
-                    Platform.runLater(() -> {
-                        setText(String.valueOf(finalAngle), heading);
-                        rotateShape(finalAngle, headingIndicator);
-                    });
-                    angle++;
+                    Thread.sleep(10);
+                    JSONObject stateJson;
+                    JSONObject indicatorsJson;
+                    stateJson = networking.getState();
+                    indicatorsJson = networking.getIndicators();
+                    final AircraftState aircraftState = Helpers.buildState(stateJson);
+                    final AircraftIndicators aircraftIndicators = Helpers.buildIndicators(indicatorsJson);
+
+                    if (true) {
+                        Platform.runLater(() -> {
+                            setVerticalControlSurface(aircraftState.getElevatorPercentage(), elevatorUp, elevatorDown);
+                            setText(aircraftState.getElevatorPercentage(), elevatorPercentage, "%");
+                            setHorizontalControlSurface(aircraftState.getAileronPercentage(), aileronRight, aileronLeft);
+                            setText(aircraftState.getAileronPercentage(), aileronPercentage, "%");
+                            setHorizontalControlSurface(aircraftState.getRudderPercentage(), rudderRight, rudderLeft);
+                            setText(aircraftState.getRudderPercentage(), rudderPercentage);
+
+                            setText(aircraftState.getIAS(), iasSpeed);
+                            setText(aircraftState.getTAS(), tasSpeed);
+                            setText(aircraftState.getAltitude(), aircraftHeight);
+
+                            setText(Math.floor(aircraftIndicators.getCompass()), heading, "°");
+                            rotateShape(Math.floor(aircraftIndicators.getCompass()), headingIndicator);
+                        });
+                    } else {
+                        System.out.println("AircraftState is not valid...");
+                    }
                 }
             }
         };

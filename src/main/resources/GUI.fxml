@@ -91,6 +91,7 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Label>
+                                                      <Text fx:id="elevatorPercentage" strokeType="OUTSIDE" strokeWidth="0.0" text="0%" />
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
@@ -100,7 +101,7 @@
                                                 </VBox>
                                                 <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="196.0" GridPane.rowIndex="2">
                                                    <children>
-                                                      <Rectangle fx:id="elevatorDown" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+                                                      <Rectangle fx:id="elevatorDown" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="150.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -122,11 +123,12 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Label>
+                                                      <Text fx:id="aileronPercentage" strokeType="OUTSIDE" strokeWidth="0.0" text="0%" />
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                    <children>
-                                                      <Rectangle fx:id="aileronLeft" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+                                                      <Rectangle fx:id="aileronLeft" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="30.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -153,11 +155,12 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Label>
+                                                      <Text fx:id="rudderPercentage" strokeType="OUTSIDE" strokeWidth="0.0" text="0%" />
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                    <children>
-                                                      <Rectangle fx:id="rudderLeft" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+                                                      <Rectangle fx:id="rudderLeft" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="30.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -170,13 +173,14 @@
                                        </children>
                                     </GridPane>
                                  </children></VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowSpan="2">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowSpan="2">
                                  <children>
                                     <Label text="Altitude">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
+                                    <Text fx:id="altitudeMeasurement" strokeType="OUTSIDE" strokeWidth="0.0" text="Meters (m)" />
                                     <Text fx:id="aircraftHeight" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                        <font>
                                           <Font size="96.0" />
@@ -184,7 +188,7 @@
                                     </Text>
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowSpan="2">
                                  <children>
                                     <Label text="Heading">
                                        <font>
@@ -192,21 +196,21 @@
                                        </font>
                                     </Label>
                                     <Text fx:id="heading" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="96.0" />
-                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
                                     </Text>
                                     <Polygon fx:id="headingIndicator" fill="DODGERBLUE" points="-25.0, 40.0, 25.0, 40.0, 0.0, -50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowSpan="2">
                                  <children>
-                                    <Label text="IAS">
+                                    <Label text="Indicated Airspeed">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Indicated Airspeed" />
+                                    <Text fx:id="iasMeasurement" strokeType="OUTSIDE" strokeWidth="0.0" text="Kilometers/hr (Km/h)" />
                                     <Text fx:id="iasSpeed" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                        <font>
                                           <Font size="96.0" />
@@ -216,12 +220,12 @@
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowSpan="2">
                                  <children>
-                                    <Label text="TAS">
+                                    <Label text="True Airspeed">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <Label text="True Airspeed" />
+                                    <Text fx:id="tasMeasurement" strokeType="OUTSIDE" strokeWidth="0.0" text="Kilometers/hr (Km/h)" />
                                     <Text fx:id="tasSpeed" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                        <font>
                                           <Font size="96.0" />

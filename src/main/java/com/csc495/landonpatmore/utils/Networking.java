@@ -8,14 +8,14 @@ import org.json.JSONObject;
 public class Networking implements Network {
 
     public Networking() {
-        
+
     }
 
     @Override
     public JSONObject retrieveData(String endpoint) {
         final HttpResponse<String> response;
         try {
-            response = Unirest.get("http://localhost:8111/" + endpoint)
+            response = Unirest.get("129.3.168.233:8111" + endpoint)
                     .asString();
             return new JSONObject(response.getBody());
         } catch (UnirestException e) {
