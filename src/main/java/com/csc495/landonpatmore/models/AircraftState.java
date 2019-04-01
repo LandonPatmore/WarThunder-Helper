@@ -1,8 +1,9 @@
 package com.csc495.landonpatmore.models;
 
-public class State {
+public class AircraftState {
     private boolean valid;
 //    private int engineNum;
+    private int altitude;
     private int aileronPercentage;
     private int elevatorPercentage;
     private int rudderPercentage;
@@ -31,7 +32,7 @@ public class State {
     private int thrust[];
     private double efficiency[];
 
-    public State() {
+    public AircraftState() {
     }
 
     public boolean isValid() {
@@ -264,5 +265,13 @@ public class State {
 
     public void setEfficiency(double[] efficiency) {
         this.efficiency = efficiency;
+    }
+
+    public int getAltitude() {
+        return altitude;
+    }
+
+    public void setAltitude(int altitude) {
+        this.altitude = altitude;
     }
 }

@@ -1,45 +1,48 @@
 package com.csc495.landonpatmore.utils;
 
-import com.csc495.landonpatmore.models.Indicators;
-import com.csc495.landonpatmore.models.State;
+import com.csc495.landonpatmore.models.AircraftState;
+import com.csc495.landonpatmore.models.AircraftIndicators;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Helpers {
 
-    public static State buildState(JSONObject json) {
-        final State state = new State();
+    public static AircraftState buildState(JSONObject json) {
+        final AircraftState aircraftState = new AircraftState();
 
         final boolean isValid = (boolean) getValue(json, "valid");
 
         if (isValid) {
-            state.setValid(true);
-            state.setAileronPercentage(getInt(json, "aileron, %"));
-            state.setElevatorPercentage(getInt(json, "elevator, %"));
-            state.setRudderPercentage(getInt(json, "rudder, %"));
-            state.setFlapsPercentage(getInt(json, "flaps, %"));
-            state.setGearPercentage(getInt(json, "gear, %"));
+            aircraftState.setValid(true);
+            aircraftState.setAileronPercentage(getInt(json, "aileron, %"));
+            aircraftState.setElevatorPercentage(getInt(json, "elevator, %"));
+            aircraftState.setRudderPercentage(getInt(json, "rudder, %"));
+            aircraftState.setFlapsPercentage(getInt(json, "flaps, %"));
+            aircraftState.setGearPercentage(getInt(json, "gear, %"));
+            aircraftState.setIAS(getInt(json, "IAS, km/h"));
+            aircraftState.setTAS(getInt(json, "TAS, km/h"));
+            aircraftState.setAltitude(getInt(json, "H, m"));
 
-            return state;
+            return aircraftState;
         } else {
-            state.setValid(false);
-            return state;
+            aircraftState.setValid(false);
+            return aircraftState;
         }
     }
 
-    public static Indicators buildIndicators(JSONObject json) {
-        final Indicators indicators = new Indicators();
+    public static AircraftIndicators buildIndicators(JSONObject json) {
+        final AircraftIndicators aircraftIndicators = new AircraftIndicators();
 
         final boolean isValid = getBoolean(json, "valid");
 
         if (isValid) {
-            indicators.setValid(true);
+            aircraftIndicators.setValid(true);
+            aircraftIndicators.setCompass(getDouble(json, "compass1"));
 
-
-            return indicators;
+            return aircraftIndicators;
         } else {
-            indicators.setValid(false);
-            return indicators;
+            aircraftIndicators.setValid(false);
+            return aircraftIndicators;
         }
     }
 

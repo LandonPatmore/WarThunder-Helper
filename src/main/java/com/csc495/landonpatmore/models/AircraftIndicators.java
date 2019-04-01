@@ -1,6 +1,6 @@
 package com.csc495.landonpatmore.models;
 
-public class Indicators {
+public class AircraftIndicators {
     private boolean valid;
     private String type;
     private boolean isdummyplane;
@@ -42,7 +42,7 @@ public class Indicators {
     private double ammo_counter3;
     private int fuelnum;
 
-    public Indicators() {
+    public AircraftIndicators() {
     }
 
     public boolean getValid() {
