@@ -50,10 +50,10 @@
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="300.0" />
                           </columnConstraints>
                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
@@ -80,8 +80,8 @@
                                             </columnConstraints>
                                             <rowConstraints>
                                                 <RowConstraints maxHeight="113.66668701171875" minHeight="10.0" prefHeight="21.66668701171875" vgrow="SOMETIMES" />
-                                              <RowConstraints maxHeight="216.33331298828125" minHeight="10.0" prefHeight="155.66668701171875" vgrow="SOMETIMES" />
-                                              <RowConstraints maxHeight="182.66668701171875" minHeight="10.0" prefHeight="165.33331298828125" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="216.33331298828125" minHeight="10.0" prefHeight="166.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="182.66668701171875" minHeight="10.0" prefHeight="152.5" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
                                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
@@ -173,7 +173,7 @@
                                        </children>
                                     </GridPane>
                                  </children></VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowSpan="2">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                  <children>
                                     <Label text="Altitude">
                                        <font>
@@ -188,7 +188,7 @@
                                     </Text>
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowSpan="2">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
                                     <Label text="Heading">
                                        <font>
@@ -200,10 +200,10 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <Polygon fx:id="headingIndicator" fill="DODGERBLUE" points="-25.0, 40.0, 25.0, 40.0, 0.0, -50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                    <Polygon fx:id="headingIndicator" fill="DODGERBLUE" points="-25.0, 40.0, 25.0, 40.0, 0.0, -50.0" stroke="BLACK" strokeType="INSIDE" />
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowSpan="2">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label text="Indicated Airspeed">
                                        <font>
@@ -218,7 +218,7 @@
                                     </Text>
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowSpan="2">
+                              <VBox alignment="CENTER" prefHeight="150.0" prefWidth="300.0" GridPane.rowIndex="1">
                                  <children>
                                     <Label text="True Airspeed">
                                        <font>
@@ -231,6 +231,26 @@
                                           <Font size="96.0" />
                                        </font>
                                     </Text>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowSpan="2">
+                                 <children>
+                                    <Label text="Roll">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="roll" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                                    <VBox fx:id="rollIndicator" alignment="CENTER" prefHeight="231.0" prefWidth="300.0">
+                                       <children>
+                                          <Polygon fill="DODGERBLUE" points="-10.0, 40.0, 10.0, 40.0, 0.0, 0.0" stroke="BLACK" strokeType="INSIDE" />
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" stroke="BLACK" strokeType="INSIDE" width="181.0">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </Rectangle>
+                                       </children>
+                                    </VBox>
                                  </children>
                               </VBox>
                            </children>

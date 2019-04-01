@@ -48,6 +48,7 @@ public class MockNetworking implements Network {
         final JSONObject state = new JSONObject();
         state.put("valid", true);
         state.put("compass1", generateDoubleValue(0, 360));
+        state.put("aviahorizon_roll", generateDoubleValue(-180, 181));
 
         return state;
     }
@@ -75,6 +76,7 @@ public class MockNetworking implements Network {
 
     private JSONObject mockIndicatorsData() {
         changeDoubleValue(currentIndicators, "compass1", 0, 360);
+        changeDoubleValue(currentIndicators, "aviahorizon_roll", -180, 181);
 
         return currentIndicators;
     }
@@ -94,7 +96,7 @@ public class MockNetworking implements Network {
     }
 
     private void changeValue(JSONObject json, String key, int random, int valueToChange, int lowerBound, int upperBound, boolean isInt) {
-        if (Math.random() >= .9) { // change value
+        if (Math.random() >= .8) { // change value
 
             if (Math.random() >= .5) {
                 random *= -1;

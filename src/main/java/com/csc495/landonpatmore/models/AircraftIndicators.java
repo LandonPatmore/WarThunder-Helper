@@ -2,6 +2,8 @@ package com.csc495.landonpatmore.models;
 
 public class AircraftIndicators {
     private boolean valid;
+    private double aviahorizon_roll;
+    private double aviahorizon_pitch;
     private String type;
     private boolean isdummyplane;
     private String stype;
@@ -45,7 +47,7 @@ public class AircraftIndicators {
     public AircraftIndicators() {
     }
 
-    public boolean getValid() {
+    public boolean isValid() {
         return valid;
     }
 
@@ -363,5 +365,21 @@ public class AircraftIndicators {
 
     public void setFuelnum(int fuelnum) {
         this.fuelnum = fuelnum;
+    }
+
+    public double getAviahorizon_roll() {
+        return aviahorizon_roll;
+    }
+
+    public void setAviahorizon_roll(double aviahorizon_roll) {
+        this.aviahorizon_roll = aviahorizon_roll;
+    }
+
+    public double getAviahorizon_pitch() {
+        return aviahorizon_pitch;
+    }
+
+    public void setAviahorizon_pitch(double aviahorizon_pitch) {
+        this.aviahorizon_pitch = aviahorizon_pitch;
     }
 }

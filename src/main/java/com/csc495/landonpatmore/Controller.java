@@ -5,18 +5,15 @@ import com.csc495.landonpatmore.models.AircraftState;
 import com.csc495.landonpatmore.utils.Helpers;
 import com.csc495.landonpatmore.utils.MockNetworking;
 import com.csc495.landonpatmore.utils.Network;
-import com.csc495.landonpatmore.utils.Networking;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.scene.transform.Rotate;
 import org.json.JSONObject;
-
-import java.io.IOException;
 
 public class Controller {
 
@@ -34,9 +31,14 @@ public class Controller {
     private Text aileronPercentage;
     @FXML
     private Text rudderPercentage;
+    @FXML
+    private Text roll;
 
     @FXML
     private Polygon headingIndicator;
+
+    @FXML
+    private VBox rollIndicator;
 
     @FXML
     private Rectangle elevatorUp;
@@ -58,7 +60,7 @@ public class Controller {
         thread.start();
     }
 
-    private void setVerticalControlSurface(int value, Rectangle positive, Rectangle negative) {
+    private void setVerticalControlSurface(Rectangle positive, Rectangle negative, int value) {
         if (value >= 0) {
             negative.setHeight(0);
             positive.setHeight(value * 1.5);
@@ -68,7 +70,7 @@ public class Controller {
         }
     }
 
-    private void setHorizontalControlSurface(int value, Rectangle positive, Rectangle negative) {
+    private void setHorizontalControlSurface(Rectangle positive, Rectangle negative, int value) {
         if (value >= 0) {
             negative.setWidth(0);
             positive.setWidth(value * 1.5);
@@ -78,15 +80,19 @@ public class Controller {
         }
     }
 
-    private void rotateShape(double angle, Polygon polygon) {
+    private void rotateShape(Polygon polygon, double angle) {
         polygon.setRotate(angle);
     }
 
-    private void setText(Object value, Text text) {
+    private void rotatePane(Pane pane, double angle) {
+        pane.setRotate(angle);
+    }
+
+    private void setText(Text text, Object value) {
         text.setText(String.valueOf(value));
     }
 
-    private void setText(Object value, Text text, String postFix) {
+    private void setText(Text text, Object value, String postFix) {
         text.setText(value + postFix);
     }
 
@@ -104,24 +110,27 @@ public class Controller {
                     final AircraftState aircraftState = Helpers.buildState(stateJson);
                     final AircraftIndicators aircraftIndicators = Helpers.buildIndicators(indicatorsJson);
 
-                    if (true) {
+                    if (aircraftState.isValid() && aircraftIndicators.isValid()) {
                         Platform.runLater(() -> {
-                            setVerticalControlSurface(aircraftState.getElevatorPercentage(), elevatorUp, elevatorDown);
-                            setText(aircraftState.getElevatorPercentage(), elevatorPercentage, "%");
-                            setHorizontalControlSurface(aircraftState.getAileronPercentage(), aileronRight, aileronLeft);
-                            setText(aircraftState.getAileronPercentage(), aileronPercentage, "%");
-                            setHorizontalControlSurface(aircraftState.getRudderPercentage(), rudderRight, rudderLeft);
-                            setText(aircraftState.getRudderPercentage(), rudderPercentage);
+                            setVerticalControlSurface(elevatorUp, elevatorDown, aircraftState.getElevatorPercentage());
+                            setText(elevatorPercentage, aircraftState.getElevatorPercentage(), "%");
+                            setHorizontalControlSurface(aileronRight, aileronLeft, aircraftState.getAileronPercentage());
+                            setText(aileronPercentage, aircraftState.getAileronPercentage(), "%");
+                            setHorizontalControlSurface(rudderRight, rudderLeft, aircraftState.getRudderPercentage());
+                            setText(rudderPercentage, aircraftState.getRudderPercentage(), "%");
 
-                            setText(aircraftState.getIAS(), iasSpeed);
-                            setText(aircraftState.getTAS(), tasSpeed);
-                            setText(aircraftState.getAltitude(), aircraftHeight);
+                            setText(iasSpeed, aircraftState.getIAS());
+                            setText(tasSpeed, aircraftState.getTAS());
+                            setText(aircraftHeight, aircraftState.getAltitude());
 
-                            setText(Math.floor(aircraftIndicators.getCompass()), heading, "°");
-                            rotateShape(Math.floor(aircraftIndicators.getCompass()), headingIndicator);
+                            setText(heading, Math.floor(aircraftIndicators.getCompass()), "°");
+                            rotateShape(headingIndicator, Math.floor(aircraftIndicators.getCompass()));
+
+                            setText(roll, Math.floor(aircraftIndicators.getAviahorizon_roll()), "°");
+                            rotatePane(rollIndicator, Math.floor(aircraftIndicators.getAviahorizon_roll()));
                         });
                     } else {
-                        System.out.println("AircraftState is not valid...");
+                        System.out.println("Not valid data...");
                     }
                 }
             }

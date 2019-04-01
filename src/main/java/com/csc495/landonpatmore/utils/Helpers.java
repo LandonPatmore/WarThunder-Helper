@@ -38,6 +38,7 @@ public class Helpers {
         if (isValid) {
             aircraftIndicators.setValid(true);
             aircraftIndicators.setCompass(getDouble(json, "compass1"));
+            aircraftIndicators.setAviahorizon_roll(getDouble(json, "aviahorizon_roll"));
 
             return aircraftIndicators;
         } else {
