@@ -4,9 +4,10 @@ Author: Landon Patmore
 
 import json
 import requests
-from time import sleep
+import time
 import signal
 import sys
+
 
 server = ""
 currentAircraft = ""
@@ -35,6 +36,7 @@ def getData():
         if state_valid and indicators_valid:
             if checkIfSamePlaneData(indicators.json()["type"]):
                 data = {
+                    "time": time.time(),
                     "state": state.json(),
                     "indicators": indicators.json()
                 }
@@ -95,7 +97,7 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)
     planeSelected = False
     while True:
-        sleep(0.1)
+        time.sleep(0.1)
         valid = getData()
 
         if valid:
