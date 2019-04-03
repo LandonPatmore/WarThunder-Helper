@@ -17,16 +17,16 @@ gulp.task("serve", ["sass"], function () {
         }
     });
 
-    gulp.watch("scss/*.scss", ["sass"]);
-    gulp.watch(["./*.html", "js/*.js"]).on("change", browserSync.reload);
+    gulp.watch("assets/scss/*.scss", ["sass"]);
+    gulp.watch(["./*.html", "assets/js/*.js"]).on("change", browserSync.reload);
 });
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task("sass", function () {
-    return gulp.src("scss/*.scss")
+    return gulp.src("assets/scss/*.scss")
         .pipe(sass())
         .pipe(autoprefixer(autoprefixerOptions))
-        .pipe(gulp.dest("./css"))
+        .pipe(gulp.dest("./assets/css"))
         .pipe(browserSync.stream());
 });
 
