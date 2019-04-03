@@ -185,6 +185,128 @@
             </div>
             <!--/.col-->
 
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i id="compassIcon" class="ti-arrow-up text-success border-success"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Heading (deg)</div>
+                                <div id="compass" class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i id="throttleIcon" class="fa fa-tachometer text-success border-success"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Throttle (%)</div>
+                                <div id="throttle" class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i id="elevatorIcon" class="fa fa-circle text-success border-success"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Elevator (%)</div>
+                                <div id="elevator" class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i id="aileronsIcon" class="fa fa-rotate-right text-success border-success"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Ailerons (%)</div>
+                                <div id="ailerons" class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i id="rudderIcon" class="ti-arrow-right text-success border-success"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Rudder (%)</div>
+                                <div id="rudder" class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i id="gearIcon" class="fa fa-circle text-success border-success"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Gear (%)</div>
+                                <div id="gear" class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i id="flapsIcon" class="fa fa-circle text-success border-success"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Flaps (%)</div>
+                                <div id="flaps" class="stat-digit">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 class="card-title mb-0">Control Surfaces</h4>
+                                <div class="small text-muted">Live Data</div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="chart-wrapper mt-4">
+                            <div id="controlSurfacesChart" style="height:400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
@@ -198,8 +320,26 @@
                         <div class="chart-wrapper mt-4">
                             <div id="heightVsSpeedChart" style="height:300px;"></div>
                         </div>
-
                     </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 class="card-title mb-0">V. Speed vs. V. Geforce</h4>
+                                <div class="small text-muted">Live Data</div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="chart-wrapper mt-4">
+                            <div id="forcesVsPitchChart" style="height:300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                     <!-- <div class="card-footer">
                         <ul>
                             <li>
@@ -239,8 +379,6 @@
                             </li>
                         </ul>
                     </div> -->
-                </div>
-            </div>
 
         </div> <!-- .content -->
     </div><!-- /#right-panel -->
