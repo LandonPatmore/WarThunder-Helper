@@ -100,7 +100,7 @@
   });
   forcesVsPitchChart.render();
 
-  var controlsChart = new CanvasJS.Chart("controlSurfacesChart", {
+  var throttleChart = new CanvasJS.Chart("throttleChart", {
     axisY:[{
       title: "Throttle",
       lineColor: "#7F6084",
@@ -108,16 +108,24 @@
       labelFontColor: "#7F6084",
       titleFontColor: "#7F6084",
       suffix: "%"
+    }],
+    toolTip: {
+      shared: true
     },
-    {
-      title: "Elevator",
-      lineColor: "#369EAD",
-      tickColor: "#369EAD",
-      labelFontColor: "#369EAD",
-      titleFontColor: "#369EAD",
-      suffix: "%"
+    legend: {
+      cursor: "pointer"
     },
-    {
+    data: [{
+      type: "line",
+      name: "Throttle",
+      color: "#7F6084",
+      dataPoints: []
+    }]
+  });
+  throttleChart.render();
+
+  var aileronsChart = new CanvasJS.Chart("aileronsChart", {
+    axisY:[{
       title: "Ailerons",
       lineColor: "#C24642",
       tickColor: "#C24642",
@@ -125,23 +133,95 @@
       titleFontColor: "#C24642",
       suffix: "%"
     }],
-    axisY2: [{
+    toolTip: {
+      shared: true
+    },
+    legend: {
+      cursor: "pointer"
+    },
+    data: [{
+      type: "line",
+      name: "Ailerons",
+      color: "#C24642",
+      dataPoints: []
+    }]
+  });
+  aileronsChart.render();
+
+  var elevatorChart = new CanvasJS.Chart("elevatorChart", {
+    axisY:[{
+      title: "Elevator",
+      lineColor: "#369EAD",
+      tickColor: "#369EAD",
+      labelFontColor: "#369EAD",
+      titleFontColor: "#369EAD",
+      suffix: "%"
+    }],
+    toolTip: {
+      shared: true
+    },
+    legend: {
+      cursor: "pointer"
+    },
+    data: [{
+      type: "line",
+      name: "Elevator",
+      color: "#369EAD",
+      dataPoints: []
+    }]
+  });
+  elevatorChart.render();
+
+  var rudderChart = new CanvasJS.Chart("rudderChart", {
+    axisY:[{
       title: "Rudder",
       lineColor: "#8FAABB",
       tickColor: "#8FAABB",
       labelFontColor: "#8FAABB",
       titleFontColor: "#8FAABB",
       suffix: "%"
+    }],
+    toolTip: {
+      shared: true
     },
-    {
+    legend: {
+      cursor: "pointer"
+    },
+    data: [{
+      type: "line",
+      name: "Rudder",
+      color: "#8FAABB",
+      dataPoints: []
+    }]
+  });
+  rudderChart.render();
+
+  var gearChart = new CanvasJS.Chart("gearChart", {
+    axisY:[{
       title: "Gear",
       lineColor: "#FAA586",
       tickColor: "#FAA586",
       labelFontColor: "#FAA586",
       titleFontColor: "#FAA586",
       suffix: "%"
+    }],
+    toolTip: {
+      shared: true
     },
-    {
+    legend: {
+      cursor: "pointer"
+    },
+    data: [{
+      type: "line",
+      name: "Gear",
+      color: "#FAA586",
+      dataPoints: []
+    }]
+  });
+  gearChart.render();
+
+  var flapsChart = new CanvasJS.Chart("flapsChart", {
+    axisY:[{
       title: "Flaps",
       lineColor: "#4661EE",
       tickColor: "#4661EE",
@@ -157,64 +237,18 @@
     },
     data: [{
       type: "line",
-      name: "Ailerons",
-      color: "#C24642",
-      showInLegend: true,
-      axisYIndex: 0,
-      dataPoints: []
-    },
-    {
-      type: "line",
-      name: "Elevator",
-      color: "#369EAD",
-      showInLegend: true,
-      axisYIndex: 1,
-      dataPoints: []
-    },
-    {
-      type: "line",
-      name: "Throttle",
-      color: "#7F6084",
-      showInLegend: true,
-      axisYIndex: 2,
-      dataPoints: []
-    },
-    {
-      type: "line",
-      name: "Rudder",
-      color: "#8FAABB",
-      showInLegend: true,
-      axisYType: "secondary",
-      axisYIndex: 0,
-      dataPoints: []
-    },
-    {
-      type: "line",
-      name: "Gear",
-      color: "#FAA586",
-      showInLegend: true,
-      axisYType: "secondary",
-      axisYIndex: 1,
-      dataPoints: []
-    },
-    {
-      type: "line",
       name: "Flaps",
       color: "#4661EE",
-      showInLegend: true,
-      axisYType: "secondary",
-      axisYIndex: 2,
       dataPoints: []
-    },
-  ]
+    }]
   });
-  controlsChart.render();
+  flapsChart.render();
 
 
   var i = 0;
   function updateHeightVsSpeedChart(data) {
     heightVsSpeedChart.data.forEach((d) => {
-      if (i > 200) {
+      if (i > 50) {
         d.dataPoints.shift()
       }
       if (d.name == "IAS") {
@@ -230,7 +264,7 @@
 
   function updateForceChart(data) {
     forcesVsPitchChart.data.forEach((d) => {
-      if (i > 200) {
+      if (i > 50) {
         d.dataPoints.shift()
       }
       if (d.name == "V. Speed") {
@@ -242,26 +276,29 @@
     forcesVsPitchChart.render();
   }
 
-  function updateControlSurfacesChart(data) {
-    controlsChart.data.forEach((d) => {
-      if (i > 50) {
-        d.dataPoints.shift()
-      }
-      if (d.name == "Throttle") {
-        d.dataPoints.push({x: i, y: data["throttle 1, %"]})
-      } else if (d.name == "Ailerons") {
-        d.dataPoints.push({x: i, y:data["aileron, %"]})
-      } else if (d.name == "Elevator") {
-        d.dataPoints.push({x: i, y:data["elevator, %"]})
-      } else if (d.name == "Rudder") {
-        d.dataPoints.push({x: i, y:data["rudder, %"]})
-      } else if (d.name == "Flaps") {
-        d.dataPoints.push({x: i, y:data["flaps, %"]})
-      } else if (d.name == "Gear") {
-        d.dataPoints.push({x: i, y:data["gear, %"]})
-      }
-    })
-    controlsChart.render();
+  function updateControlSurfacesCharts(data) {
+    throttleChart.data[0].dataPoints.push({x: i, y: data["throttle 1, %"]})
+    aileronsChart.data[0].dataPoints.push({x: i, y:data["aileron, %"]})
+    elevatorChart.data[0].dataPoints.push({x: i, y:data["elevator, %"]})
+    rudderChart.data[0].dataPoints.push({x: i, y:data["rudder, %"]})
+    gearChart.data[0].dataPoints.push({x: i, y:data["gear, %"]})
+    flapsChart.data[0].dataPoints.push({x: i, y:data["flaps, %"]})
+
+    if (i > 50) {
+      throttleChart.data[0].dataPoints.shift();
+      aileronsChart.data[0].dataPoints.shift();
+      elevatorChart.data[0].dataPoints.shift();
+      rudderChart.data[0].dataPoints.shift();
+      gearChart.data[0].dataPoints.shift();
+      flapsChart.data[0].dataPoints.shift();
+    }
+
+    throttleChart.render();
+    aileronsChart.render();
+    elevatorChart.render();
+    rudderChart.render();
+    gearChart.render();
+    flapsChart.render();
   }
 
   setInterval(requestData, 100);
@@ -276,14 +313,14 @@
 
       updateElement($("#throttle"), data["throttle 1, %"], null, null, null)
       updateElement($("#elevator"), data["elevator, %"], $("#elevatorIcon"), "ti-arrow-down", "ti-arrow-up")
-      updateElement($("#ailerons"), data["aileron, %"], $("#aileronsIcon"), "fa fa-rotate-left", "fa fa-rotate-right","fa fa-circle" )
-      updateElement($("#rudder"), data["rudder, %"], $("#rudderIcon"), "ti-arrow-left", "ti-arrow-right", "fa fa-circle")
+      updateElement($("#ailerons"), data["aileron, %"], $("#aileronsIcon"), "fa fa-rotate-left", "fa fa-rotate-right" )
+      updateElement($("#rudder"), data["rudder, %"], $("#rudderIcon"), "ti-arrow-left", "ti-arrow-right")
       updateElement($("#gear"), data["gear, %"], $("#gearIcon"), null, "ti-arrow-down", "ti-arrow-up")
       updateElement($("#flaps"), data["flaps, %"], $("#flapsIcon"), null, "ti-arrow-down", "ti-arrow-up")
 
       updateHeightVsSpeedChart(data);
       updateForceChart(data)
-      updateControlSurfacesChart(data)
+      updateControlSurfacesCharts(data)
       i++;
     })
 
@@ -301,17 +338,27 @@
     iconElement.css({'transform' : 'rotate('+ rotation +'deg)'});
   }
 
-  function updateElement(textElement, text, iconElement, negIcon, posIcon, middleIcon) {
+  function updateElement(textElement, text, iconElement, negIcon, posIcon) {
     textElement.text(text)
     if (negIcon == null && posIcon == null) {
       return
     }
+
+    if(text == 0) {
+      iconElement.removeClass(negIcon).removeClass(posIcon).addClass("ti-split-v")
+      iconElement.removeClass("border-danger").removeClass("text-danger")
+      iconElement.addClass("border-warning").addClass("text-warning")
+      return
+    }
+
     if (Math.sign(text) == -1) {
-      iconElement.removeClass(posIcon).removeClass(middleIcon).addClass(negIcon)
+      iconElement.removeClass(posIcon).removeClass("ti-split-v").addClass(negIcon)
+      iconElement.addClass("border-danger").addClass("text-danger")
+      iconElement.removeClass("border-warning").removeClass("text-warning")
     } else if (Math.sign(text) == 1){
-      iconElement.removeClass(negIcon).removeClass(middleIcon).addClass(posIcon)
-    } else if (middleIcon != null){
-      iconElement.removeClass(negIcon).removeClass(posIcon).addClass(middleIcon)
+      iconElement.removeClass(negIcon).removeClass("ti-split-v").addClass(posIcon)
+      iconElement.removeClass("border-danger").removeClass("text-danger")
+      iconElement.removeClass("border-warning").removeClass("text-warning")
     }
   }
 
