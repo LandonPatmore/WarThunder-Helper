@@ -367,7 +367,7 @@ function fixTypeDisplay(name) {
 $("#serverConnectButton").click(() => {
   let connection = $("#serverConnectionInfoText").val()
   $.ajax({
-    url: "http://" + connection + ":8111/status",
+    url: "http://" + connection + ":8111/state",
     type: "GET",
     success: () => {
       $("#connectedText").text("Connected!")
