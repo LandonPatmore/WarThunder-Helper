@@ -377,7 +377,7 @@ $("#serverConnectButton").click(() => {
       $("#serverConnectionInfoText").prop("disabled", true);
       $("#serverConnectButton").prop("disabled", true);
 
-      setInterval(requestData, 100);
+      setInterval(requestData, 250);
     },
     error: () => {
       alert(connection + " is not a valid server address")
