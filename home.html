@@ -37,9 +37,24 @@
 
             <div class="header-menu">
 
-                <div class="col-sm-7">
+                <div class="col-sm-4">
                     <div class="header-left">
                         <h2>War Thunder Data Viewer</h2>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="text-center mb-0">
+                        <p id="connectedText" class="text-danger">Not currently connected</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="float-right">
+                        <div class="input-group">
+                            <input type="text" id="serverConnectionInfoText" class="form-control" placeholder="Server Address">
+                            <div class="input-group-append">
+                                <button id="serverConnectButton" class="btn btn-outline-success" type="button">Connect</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,7 +84,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i class="ti-arrows-vertical text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i class="ti-arrows-vertical text-success border-success"></i>
+                            </div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Height (m)</div>
                                 <div id="height" class="stat-digit">0</div>
@@ -84,7 +100,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i class="fa fa-tachometer text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i class="fa fa-tachometer text-success border-success"></i>
+                            </div>
                             <div class="stat-content dib">
                                 <div class="stat-text">IAS (Km/h)</div>
                                 <div id="ias" class="stat-digit">0</div>
@@ -99,7 +116,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i id="throttleIcon" class="fa fa-tachometer text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i id="throttleIcon"
+                                    class="fa fa-tachometer text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Throttle (%)</div>
                                 <div id="throttle" class="stat-digit">0</div>
@@ -114,7 +132,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i class="fa fa-tachometer text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i class="fa fa-tachometer text-success border-success"></i>
+                            </div>
                             <div class="stat-content dib">
                                 <div class="stat-text">RPM</div>
                                 <div id="rpm" class="stat-digit">0</div>
@@ -129,7 +148,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i id="vspeedIcon" class="ti-arrow-up text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i id="vspeedIcon"
+                                    class="ti-arrow-up text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">V. Speed (m/s)</div>
                                 <div id="vspeed" class="stat-digit">0</div>
@@ -144,7 +164,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i class="fa fa-tachometer text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i class="fa fa-tachometer text-success border-success"></i>
+                            </div>
                             <div class="stat-content dib">
                                 <div class="stat-text">TAS (Km/h)</div>
                                 <div id="tas" class="stat-digit">0</div>
@@ -174,7 +195,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i id="pitchIcon" class="ti-arrow-up text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i id="pitchIcon"
+                                    class="ti-arrow-up text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Pitch (deg)</div>
                                 <div id="pitch" class="stat-digit">0</div>
@@ -189,7 +211,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i id="rollIcon" class="fa fa-rotate-right text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i id="rollIcon"
+                                    class="fa fa-rotate-right text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Roll (deg)</div>
                                 <div id="roll" class="stat-digit">0</div>
@@ -204,7 +227,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i id="compassIcon" class="ti-arrow-up text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i id="compassIcon"
+                                    class="ti-arrow-up text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Heading (deg)</div>
                                 <div id="compass" class="stat-digit">0</div>
@@ -219,7 +243,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i id="elevatorIcon" class="fa fa-circle text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i id="elevatorIcon"
+                                    class="fa fa-circle text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Elevator (%)</div>
                                 <div id="elevator" class="stat-digit">0</div>
@@ -234,7 +259,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i id="aileronsIcon" class="fa fa-rotate-right text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i id="aileronsIcon"
+                                    class="fa fa-rotate-right text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Ailerons (%)</div>
                                 <div id="ailerons" class="stat-digit">0</div>
@@ -249,7 +275,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i id="rudderIcon" class="ti-arrow-right text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i id="rudderIcon"
+                                    class="ti-arrow-right text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Rudder (%)</div>
                                 <div id="rudder" class="stat-digit">0</div>
@@ -264,7 +291,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i id="gearIcon" class="fa fa-circle text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i id="gearIcon"
+                                    class="fa fa-circle text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Gear (%)</div>
                                 <div id="gear" class="stat-digit">0</div>
@@ -279,7 +307,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i id="flapsIcon" class="fa fa-circle text-success border-success"></i></div>
+                            <div class="stat-icon dib"><i id="flapsIcon"
+                                    class="fa fa-circle text-success border-success"></i></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Flaps (%)</div>
                                 <div id="flaps" class="stat-digit">0</div>
@@ -433,7 +462,6 @@
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <script src="vendors/canvas/canvas.js"></script>
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js"></script>
     <script src="assets/js/warthunder.js"></script>
 </body>
 
