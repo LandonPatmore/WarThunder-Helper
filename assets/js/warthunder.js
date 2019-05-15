@@ -1,3 +1,5 @@
+var connection = ""
+
 var heightVsSpeedChart = new CanvasJS.Chart("heightVsSpeedChart", {
   axisY: [{
     title: "IAS",
@@ -300,7 +302,7 @@ function updateControlSurfacesCharts(data) {
 }
 
 function requestData() {
-  $.getJSON("http://localhost:7000/state", function (data) {
+  $.getJSON("http://" + connection + ":8111/state", function (data) {
     updateElement($("#height"), data["H, m"], null, null, null)
     updateElement($("#vspeed"), data["Vy, m/s"], $("#vspeedIcon"), "ti-arrow-down", "ti-arrow-up")
     updateElement($("#ias"), data["IAS, km/h"], null, null, null)
@@ -321,7 +323,7 @@ function requestData() {
     i++;
   })
 
-  $.getJSON("http://localhost:7000/indicators", function (data) {
+  $.getJSON("http://" + connection + ":8111/indicators", function (data) {
     updateElement($("#pitch"), Math.floor(data["aviahorizon_pitch"]), $("#pitchIcon"), "ti-arrow-up", "ti-arrow-down")
     updateElement($("#roll"), Math.floor(data["aviahorizon_roll"]), $("#rollIcon"), "fa fa-rotate-left", "fa fa-rotate-right", "fa fa-circle")
     rotateElement($("#compass"), $("#compassIcon"), Math.floor(data["compass1"]))
@@ -365,7 +367,7 @@ function fixTypeDisplay(name) {
 }
 
 $("#serverConnectButton").click(() => {
-  let connection = $("#serverConnectionInfoText").val()
+  connection = $("#serverConnectionInfoText").val()
   $.ajax({
     url: "http://" + connection + ":8111/state",
     type: "GET",
@@ -374,13 +376,13 @@ $("#serverConnectButton").click(() => {
       $("#connectedText").removeClass("text-danger").addClass("text-success")
       $("#serverConnectionInfoText").prop("disabled", true);
       $("#serverConnectButton").prop("disabled", true);
+
+      setInterval(requestData, 100);
     },
-    error:  () => {
+    error: () => {
       alert(connection + " is not a valid server address")
       $("#connectedText").text("Invalid server address")
     },
     timeout: 1000 //in milliseconds
   });
 })
-
-  // setInterval(requestData, 100);
